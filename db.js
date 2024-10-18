@@ -1,12 +1,15 @@
 // backend/src/config/db.js
 
 const mysql = require('mysql2/promise');
+require('dotenv').config(); // Load environment variables
 
 const pool = mysql.createPool({
-  host: 'sql211.infinityfree.com', // MySQL Host Name from InfinityFree
-  user: 'if0_37534614',            // MySQL User Name from InfinityFree
-  password: '2anIxil8MtTF', // Use your vPanel password
-  database: 'if0_37534614_school_reservation'  // MySQL DB Name
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME
 });
 
 module.exports = pool;
+
+
