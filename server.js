@@ -9,7 +9,8 @@ const PORT = 8081;
 // CORS configuration to allow your frontend's URL
 const corsOptions = {
   origin: 'http://labreservation.42web.io', // your frontend's URL
-  methods: 'GET,POST',
+  methods: ['GET','POST'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
   optionsSuccessStatus: 200
 };
 
@@ -38,11 +39,11 @@ app.post('/login', async (req, res) => {
 
 // Signup route
 app.post('/signup', async (req, res) => {
-  const { email, password, ID, firstName, lastName, yearLevel } = req.body;
+  const { email, password, ID, First_name, Last_name, Year_Level } = req.body;
   try {
     await db.execute(
-      'INSERT INTO students (id, email, password, firstname, lastname, yearlevel) VALUES (?, ?, ?, ?, ?, ?)',
-      [ID, email, password, firstName, lastName, yearLevel]
+      'INSERT INTO students (ID, email, password, Last_name, First_name, Year_Level) VALUES (?, ?, ?, ?, ?, ?)',
+      [ID, email, password, First_name, Last_name, Year_Level]
     );
     res.send('User registered successfully');
   } catch (err) {
